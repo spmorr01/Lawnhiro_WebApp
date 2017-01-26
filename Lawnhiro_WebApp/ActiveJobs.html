@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/knockout-3.4.1.js"></script>
+    <script src="/Scripts/ActiveJobs.js"></script>
+
+    <link rel="stylesheet" href="/CSS/ActiveJobs.css">
+    <script>
+        $(function () {
+            initialize();
+        });
+    </script>
+</head>
+<body>
+    <div id="HeaderDiv">
+        <h1>Active Jobs</h1>
+        <div data-bind="foreach: activeOrders">
+            <div class="activeOrderListing">
+                <div>
+                    <span><b>Order Number:</b></span>
+                    <span data-bind="text: OrderID"></span>
+                </div>
+                <div>
+                    <span><b>Order Sent:</b></span>
+                    <span data-bind="text: OrderDate"></span>
+                    <span data-bind="text: OrderTime"></span>
+                </div>
+                <div>
+                    <span><b>Customer:</b></span>
+                    <span data-bind="text: Name"></span>
+                </div>
+                <div>
+                    <span><b>Address:</b></span>
+                    <span data-bind="text: Address1 + ','"></span>
+                    <span data-bind="text: Address2 + ',', visible: Address2.length > 0"></span>
+                    <span data-bind="text: City + ','"></span>
+                    <span data-bind="text: State"></span>
+                    <span data-bind="text: Zip"></span>
+                </div>
+                <div>
+                    <span><b>Customer Notes:</b></span>
+                    <span data-bind="text: CustomerNotes"></span>
+                </div>
+                <div>
+                    <span><b>Price:</b></span>
+                    <span data-bind="text: '$' + CalculationResultPrice"></span>
+                </div>
+                <div style="text-align:center">
+                    <input type="submit" value="Claim" data-bind="click: claimJob.bind($data, OrderID)" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

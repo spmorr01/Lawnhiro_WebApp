@@ -110,8 +110,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActiveJobs.html" />
+    <Content Include="CSS\ActiveJobs.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ActiveJobs.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\knockout-3.4.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
