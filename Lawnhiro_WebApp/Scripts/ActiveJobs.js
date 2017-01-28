@@ -1,20 +1,58 @@
 ﻿function initMap() {
-    console.log("mapssss");
+    
 }
 
-function createMap() {
-    var myLatLng = { lat: -25.363, lng: 131.044 };
+var map;
 
-    var map = new google.maps.Map(document.getElementById('Maps'), {
-        zoom: 4,
+function createMap() {
+    var myLatLng = { lat: 40.8258, lng: -96.6852 };
+
+    map = new google.maps.Map(document.getElementById('Maps'), {
+        zoom: 12,
         center: myLatLng
     });
 
-    var marker = new google.maps.Marker({
-        position: myLatLng,
+    //var marker = new google.maps.Marker({
+    //    position: myLatLng,
+    //    map: map,
+    //    title: 'Hello World!'
+    //});
+
+    //var map;
+    //var bounds = new google.maps.LatLngBounds();
+    //var mapOptions = {
+    //    mapTypeId: 'roadmap',//,
+    //    center: new google.maps.LatLng(40.8258, 96.6852)
+    ////center: new google.maps.LatLng(40.8258, 96.6852)
+    //};
+
+    // Display a map on the page
+    //map = new google.maps.Map(document.getElementById("Maps"), mapOptions);
+    map.setTilt(45);
+}
+
+function addMarkers(lat, lng) {
+    var position = { lat: lat, lng: lng };
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(position);
+    marker = new google.maps.Marker({
+        position: position,
         map: map,
-        title: 'Hello World!'
+        zoomControl: true,
+        scaleControl: true,
+        title: "Order Number Here"
     });
+
+    // Allow each marker to have an info window    
+    //google.maps.event.addListener(marker, 'click', (function (marker, 0) {
+    //    return function () {
+    //        infoWindow.setContent(infoWindowContent[0][0]);
+    //        infoWindow.open(map, marker);
+    //    }
+    //})(marker, 0));
+
+    // Automatically center the map fitting all markers on the screen
+    //map.fitBounds(bounds);
 }
 
 var activeOrderVm = {
@@ -22,6 +60,7 @@ var activeOrderVm = {
 }
 
 var addresses = [];
+var latLngList = [];
 
 function initialize() {
     getActiveOrders();
@@ -30,7 +69,7 @@ function initialize() {
     
     //getGeoCodingInfo
 
-   // createMap();
+   createMap();
     
 }
 
@@ -79,8 +118,14 @@ function getGeoCodingInfo(addressParam) {
             //$.each(data, function (item) {
             //    alert(item.PageName);
             //});
-            console.log(data);
 
+            var lat = data.results[0].geometry.location.lat;
+            var lng = data.results[0].geometry.location.lng;
+
+            addMarkers(lat, lng);
+
+            //console.log(data.results[0].geometry.location.lat);
+            //latLngList.push()
             
         },
         fail: function (jqXHR, textStatus) {
