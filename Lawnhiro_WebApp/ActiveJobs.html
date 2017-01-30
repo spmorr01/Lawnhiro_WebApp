@@ -2,27 +2,35 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <script src="/Scripts/jquery-3.1.1.min.js"></script>
     <script src="/Scripts/knockout-3.4.1.js"></script>
     <script src="/Scripts/ActiveJobs.js"></script>
+    <!--<script src="/Scripts/bootstrap.min.js"></script>-->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATiMiFCSPiuHmHGwBrBhGOEmH3wadkXhM&callback=initMap"></script>
 
     <link rel="stylesheet" href="/CSS/ActiveJobs.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="/CSS/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/CSS/bootstrap.min.css">-->
 
     <style>
-         /* Always set the map height explicitly to define the size of the div
+        /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
-         #Maps {
-             height: 100%;
-         }
-         /* Optional: Makes the sample page fill the window. */
-         html, body {
-             height: 100%;
-             margin: 0;
-             padding: 0;
-         }
+        #Maps {
+            height: 100%;
+            /*float: right;*/
+            /*position: relative;
+            top: 50%;
+            transform: translateY(-50%);*/
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
     </style>
     <script>
         $(function () {
@@ -33,8 +41,11 @@
 <body>
     <div id="HeaderDiv">
         <h1>Active Jobs</h1>
-        <div data-bind="foreach: activeOrders">
-            <div class="activeOrderListing">
+    </div>
+
+    <div class="col-xs-3">
+        <div id="OrdersDiv" class=" activeOrderListing" data-bind="foreach: activeOrders">
+            <div>
                 <div>
                     <span><b>Order Number:</b></span>
                     <span data-bind="text: OrderID"></span>
@@ -70,9 +81,11 @@
             </div>
         </div>
     </div>
+    <div  class="col-xs-9">
+        <div id="Maps" style="display:inline-block;width:100%; height:500px;">
 
-    <div id="Maps">
-
+        </div>
     </div>
+
 </body>
 </html>

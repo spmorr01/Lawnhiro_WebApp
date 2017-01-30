@@ -64,7 +64,7 @@ var latLngList = [];
 
 function initialize() {
     getActiveOrders();
-    ko.applyBindings(activeOrderVm, document.getElementById("HeaderDiv"));
+    ko.applyBindings(activeOrderVm, document.getElementById("OrdersDiv"));
 
     
     //getGeoCodingInfo

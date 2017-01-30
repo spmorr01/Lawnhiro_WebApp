@@ -1,5 +1,17 @@
 ﻿.activeOrderListing {
     background-color: #C0C0C0;
-    margin: 25px;
-    display:inline-block;
+    padding:5px 5px;
+    max-width: 500px;
+    max-height: 500px;
+    vertical-align:middle;
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    border: 3px solid black;
+    /*float:left;*/
+
+    /*position: relative;
+  top: 50%;
+  transform: translateY(-50%);*/
+    /*display:inline-block;*/
 }
