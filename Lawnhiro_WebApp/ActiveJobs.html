@@ -6,32 +6,11 @@
     <script src="/Scripts/jquery-3.1.1.min.js"></script>
     <script src="/Scripts/knockout-3.4.1.js"></script>
     <script src="/Scripts/ActiveJobs.js"></script>
-    <!--<script src="/Scripts/bootstrap.min.js"></script>-->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATiMiFCSPiuHmHGwBrBhGOEmH3wadkXhM&callback=initMap"></script>
 
     <link rel="stylesheet" href="/CSS/ActiveJobs.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="/CSS/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="/CSS/bootstrap.min.css">-->
-
-    <style>
-        /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-        #Maps {
-            height: 100%;
-            /*float: right;*/
-            /*position: relative;
-            top: 50%;
-            transform: translateY(-50%);*/
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
     <script>
         $(function () {
             initialize();
@@ -44,7 +23,7 @@
     </div>
 
     <div class="col-xs-3">
-        <div id="OrdersDiv" class=" activeOrderListing" data-bind="foreach: activeOrders">
+        <div id="OrdersDiv" class="activeOrderListing" data-bind="foreach: activeOrders">
             <div>
                 <div>
                     <span><b>Order Number:</b></span>
@@ -52,8 +31,8 @@
                 </div>
                 <div>
                     <span><b>Order Sent:</b></span>
-                    <span data-bind="text: OrderDate"></span>
                     <span data-bind="text: OrderTime"></span>
+                    <span data-bind="text: OrderDate"></span>
                 </div>
                 <div>
                     <span><b>Customer:</b></span>
@@ -67,7 +46,7 @@
                     <span data-bind="text: State"></span>
                     <span data-bind="text: Zip"></span>
                 </div>
-                <div>
+                <div data-bind="visible: CustomerNotes.length > 0">
                     <span><b>Customer Notes:</b></span>
                     <span data-bind="text: CustomerNotes"></span>
                 </div>
@@ -82,7 +61,7 @@
         </div>
     </div>
     <div  class="col-xs-9">
-        <div id="Maps" style="display:inline-block;width:100%; height:500px;">
+        <div id="Maps" class="googleMap">
 
         </div>
     </div>

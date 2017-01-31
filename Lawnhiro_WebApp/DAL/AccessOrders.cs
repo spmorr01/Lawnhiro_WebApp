@@ -27,7 +27,7 @@ namespace Lawnhiro_WebApp.DAL
                     while (reader.Read())
                     {
                         int orderId = reader.GetInt32(0);    // Weight int
-                        DateTime orderDate = reader.GetDateTime(1).Date;  // Name string
+                        string orderDate = reader.GetDateTime(1).ToShortDateString();  // Name string
                         TimeSpan orderTime = reader.GetTimeSpan(2); // Breed string
                         string businessSource = reader.GetString(3);
                         string payPalOrderId = reader.GetString(4);

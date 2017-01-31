@@ -1,5 +1,5 @@
 ﻿function initMap() {
-    
+    //Waiting for document to be finished loading before creating map
 }
 
 var map;
@@ -11,27 +11,10 @@ function createMap() {
         zoom: 12,
         center: myLatLng
     });
-
-    //var marker = new google.maps.Marker({
-    //    position: myLatLng,
-    //    map: map,
-    //    title: 'Hello World!'
-    //});
-
-    //var map;
-    //var bounds = new google.maps.LatLngBounds();
-    //var mapOptions = {
-    //    mapTypeId: 'roadmap',//,
-    //    center: new google.maps.LatLng(40.8258, 96.6852)
-    ////center: new google.maps.LatLng(40.8258, 96.6852)
-    //};
-
-    // Display a map on the page
-    //map = new google.maps.Map(document.getElementById("Maps"), mapOptions);
     map.setTilt(45);
 }
 
-function addMarkers(lat, lng) {
+function addMarkers(lat, lng, orderId) {
     var position = { lat: lat, lng: lng };
     var bounds = new google.maps.LatLngBounds();
     bounds.extend(position);
@@ -40,19 +23,8 @@ function addMarkers(lat, lng) {
         map: map,
         zoomControl: true,
         scaleControl: true,
-        title: "Order Number Here"
+        title: orderId
     });
-
-    // Allow each marker to have an info window    
-    //google.maps.event.addListener(marker, 'click', (function (marker, 0) {
-    //    return function () {
-    //        infoWindow.setContent(infoWindowContent[0][0]);
-    //        infoWindow.open(map, marker);
-    //    }
-    //})(marker, 0));
-
-    // Automatically center the map fitting all markers on the screen
-    //map.fitBounds(bounds);
 }
 
 var activeOrderVm = {
@@ -65,12 +37,7 @@ var latLngList = [];
 function initialize() {
     getActiveOrders();
     ko.applyBindings(activeOrderVm, document.getElementById("OrdersDiv"));
-
-    
-    //getGeoCodingInfo
-
-   createMap();
-    
+    createMap();
 }
 
 function claimJob(orderId) {
@@ -85,18 +52,11 @@ function getActiveOrders() {
         contentType: 'application/json; charset=utf-8',
 
         success: function (data) {
-            //alert(data);
-            //showProducts(data);
-            //$.each(data, function (item) {
-            //    alert(item.PageName);
-            //});
             activeOrderVm.activeOrders(data);
             ko.utils.arrayForEach(activeOrderVm.activeOrders(), function (values) {
-                //console.log(values);
                 var address = values.Address1 + ', ' + values.City + ', ' + values.State + ' ' + values.Zip
-               // addresses.push(address);
-                console.log(address);
-                getGeoCodingInfo(address);
+                var orderId = String(values.OrderID);
+                getGeoCodingInfo(address, orderId);
             });
         },
         fail: function (jqXHR, textStatus) {
@@ -105,28 +65,17 @@ function getActiveOrders() {
     })
 }
 
-function getGeoCodingInfo(addressParam) {
+function getGeoCodingInfo(addressParam, orderId) {
     $.ajax({
         url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + addressParam + '&key=AIzaSyATiMiFCSPiuHmHGwBrBhGOEmH3wadkXhM',
         type: 'GET',
         dataType: 'json',
-        //contentType: 'application/json; charset=utf-8',
 
         success: function (data) {
-            //alert(data);
-            //showProducts(data);
-            //$.each(data, function (item) {
-            //    alert(item.PageName);
-            //});
-
             var lat = data.results[0].geometry.location.lat;
             var lng = data.results[0].geometry.location.lng;
 
-            addMarkers(lat, lng);
-
-            //console.log(data.results[0].geometry.location.lat);
-            //latLngList.push()
-            
+            addMarkers(lat, lng, orderId);
         },
         fail: function (jqXHR, textStatus) {
             alert("Request failed: " + textStatus);

@@ -8,7 +8,7 @@ namespace Lawnhiro_WebApp.Models
     public class Orders
     {
         public int OrderID { get; set; }
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
         public TimeSpan OrderTime { get; set; }
         public string BusinessSource { get; set; }
         public string PayPalOrderID { get; set; }
